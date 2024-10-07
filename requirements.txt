@@ -5,3 +5,6 @@ openai
 python-dotenv
 youtube-transcript-api
 pytube
+PyPDF2
+qdrant-client
+openai
