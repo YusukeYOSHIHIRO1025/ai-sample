@@ -42,10 +42,13 @@ def get_document(url):
                 add_video_info=True,  # タイトルや再生数も取得できる
                 language=['en', 'ja']  # 英語→日本語の優先順位で字幕を取得
             )
-            return loader.load()
+            documents = loader.load()
+            st.write(f"Documents Loaded: {documents}")  # ドキュメントの内容を確認
+            return documents
     except Exception as e:
         st.error(f"Error fetching document: {e}")
         return None
+
 
 
 def summarize(llm, docs):
