@@ -35,13 +35,18 @@ def get_url_input():
     return url
 
 def get_document(url):
-    with st.spinner("Fetching Content ..."):
-        loader = YoutubeLoader.from_youtube_url(
-            url,
-            add_video_info=True,  # タイトルや再生数も取得できる
-            language=['en', 'ja']  # 英語→日本語の優先順位で字幕を取得
-        )
-        return loader.load()
+    try:
+        with st.spinner("Fetching Content ..."):
+            loader = YoutubeLoader.from_youtube_url(
+                url,
+                add_video_info=True,  # タイトルや再生数も取得できる
+                language=['en', 'ja']  # 英語→日本語の優先順位で字幕を取得
+            )
+            return loader.load()
+    except Exception as e:
+        st.error(f"Error fetching document: {e}")
+        return None
+
 
 def summarize(llm, docs):
     prompt_template = """Write a concise Japanese summary of the following transcript of Youtube Video.
